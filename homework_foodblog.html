@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Food Blog</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app" class="container">
+      <!-- Navigation Component -->
+      <navigation-bar></navigation-bar>
+
+      <!-- Main Content Section -->
+      <div class="row mt-4">
+        <div class="col-md-4 bg-info" id="leftside"></div>
+        <div class="col-md-8 bg-light" id="rightside">
+          <!-- Blog Content Container -->
+          <div id="container" class="bg-white p-4 rounded shadow-sm">
+            <h1 class="text-center mb-4 text-warning">Food Blog</h1>
+
+            <!-- White Chicken Chili Image Component -->
+            <chili-image></chili-image>
+
+            <!-- Blog Post Component -->
+            <comments></comments>
+
+            <!-- Blog Posts Section -->
+            <section id="blogposts" class="mt-4">
+              <div
+                v-for="(post, index) in posts"
+                :key="index"
+                class="post card mb-3 p-3"
+              >
+                <img
+                  :src="profilePlaceholder"
+                  alt="Profile Picture"
+                  class="profile-pic float-left mr-3"
+                  @click="showProfile(index)"
+                />
+                <div v-if="activeProfile === index" class="floating-box">
+                  <button class="close-btn" @click="closeProfile">×</button>
+                  <h3>{{ post.author }}</h3>
+                  <p><strong>Foodie Level:</strong> {{ post.foodieLevel }}</p>
+                  <p><strong>Bio:</strong> {{ post.bio }}</p>
+                </div>
+                <span class="author">{{ post.author }}</span> —
+                <span class="date">{{ post.date }}</span>
+                <p>{{ post.paragraph }}</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <footer class="text-center mt-4">&copy; 2024 FOOD BLOG</footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
